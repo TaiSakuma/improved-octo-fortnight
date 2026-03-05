@@ -1,0 +1,19 @@
+[project]
+name = "improved-octo-fortnight"
+dynamic = ["version"]
+description = "Add your description here"
+readme = "README.md"
+authors = [{ name = "Tai Sakuma" }]
+requires-python = ">=3.12"
+dependencies = []
+
+[build-system]
+requires = ["hatchling", "hatch-regex-commit"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "regex_commit"
+path = "src/improved_octo_fortnight/__about__.py"
+tag_name = "v{new_version}"
+tag_sign = false
+check_dirty = false
