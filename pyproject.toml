@@ -14,6 +14,6 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 source = "regex_commit"
 path = "src/improved_octo_fortnight/__about__.py"
-tag_name = "v{new_version}"
+tag_name = "u{new_version}"
 tag_sign = false
 check_dirty = false
