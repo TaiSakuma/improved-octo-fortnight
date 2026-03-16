@@ -17,3 +17,6 @@ path = "src/improved_octo_fortnight/__about__.py"
 tag_name = "u{new_version}"
 tag_sign = false
 check_dirty = false
+
+[dependency-groups]
+docs = ["zensical"]
