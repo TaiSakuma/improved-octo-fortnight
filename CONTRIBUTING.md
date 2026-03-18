@@ -1,8 +1,18 @@
 # Contributing
 
+## Docstrings
+
+This project uses [mkdocstrings] to generate API documentation from docstrings.
+Write docstrings in the [Numpydoc style].
+
+[mkdocstrings]: https://mkdocstrings.github.io/
+[Numpydoc style]: https://mkdocstrings.github.io/griffe/reference/docstrings/#numpydoc-style
+
 ## PR Title Convention
 
-This project uses [Conventional Commits](https://www.conventionalcommits.org/) for **PR titles**. Since we squash-merge, the PR title becomes the final commit message.
+This project uses [Conventional Commits] for **PR titles**. Since we squash-merge, the PR title becomes the final commit message.
+
+[Conventional Commits]: https://www.conventionalcommits.org/
 
 ### Format
 
@@ -12,19 +22,19 @@ type: description
 
 ### Allowed Types
 
-| Type | Purpose |
-|------|---------|
-| `feat` | A new feature |
-| `fix` | A bug fix |
-| `docs` | Documentation only |
-| `style` | Code style (formatting, semicolons, etc.) |
+| Type       | Purpose                                                 |
+| ---------- | ------------------------------------------------------- |
+| `feat`     | A new feature                                           |
+| `fix`      | A bug fix                                               |
+| `docs`     | Documentation only                                      |
+| `style`    | Code style (formatting, semicolons, etc.)               |
 | `refactor` | Code change that neither fixes a bug nor adds a feature |
-| `perf` | Performance improvement |
-| `test` | Adding or updating tests |
-| `build` | Build system or external dependencies |
-| `ci` | CI configuration |
-| `chore` | Other changes that don't modify src or test files |
-| `revert` | Reverts a previous commit |
+| `perf`     | Performance improvement                                 |
+| `test`     | Adding or updating tests                                |
+| `build`    | Build system or external dependencies                   |
+| `ci`       | CI configuration                                        |
+| `chore`    | Other changes that don't modify src or test files       |
+| `revert`   | Reverts a previous commit                               |
 
 ### Examples
 
