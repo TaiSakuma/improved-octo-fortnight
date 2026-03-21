@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 
 
+## [0.2.2] - 2026-03-21
+
+### Features
+
+- Poll preview URL before posting PR comment ([#14](https://github.com/TaiSakuma/improved-octo-fortnight/pull/14))
+
+### Documentation
+
+- Write README with features and workflow overview ([#15](https://github.com/TaiSakuma/improved-octo-fortnight/pull/15))
+
+### Refactoring
+
+- Move script and extract build-docs action ([#12](https://github.com/TaiSakuma/improved-octo-fortnight/pull/12))
+- Move script and extract build-docs action ([#13](https://github.com/TaiSakuma/improved-octo-fortnight/pull/13))
+
+
 ## [0.2.1] - 2026-03-21
 
 ### Bug Fixes
