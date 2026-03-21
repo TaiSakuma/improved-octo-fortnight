@@ -27,7 +27,7 @@ jobs:
       - name: Get preview URL
         id: preview
         run: |
-          url=$(uv run --group docs python -c "import tomlkit; print(tomlkit.loads(open('zensical.local.toml').read()).get('project', {}).get('site_url', ''))")
+          url=$(uv run --group docs python -c "import tomlkit; print(tomlkit.loads(open('zensical.toml').read()).get('project', {}).get('site_url', ''))")
           echo "url=${url}" >> "$GITHUB_OUTPUT"
 
       - uses: ./.github/actions/deploy-to-gh-pages

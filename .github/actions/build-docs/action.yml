@@ -12,5 +12,5 @@ runs:
     - shell: bash
       run: |
         uv run --group docs python .github/scripts/override_site_url.py "${{ inputs.subdir }}"
-        uv run --group docs zensical build --clean --config-file zensical.local.toml
+        uv run --group docs zensical build --clean
         cp -r site /tmp/built-site
