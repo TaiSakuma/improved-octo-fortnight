@@ -36,9 +36,21 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const marker = '<!-- docs-preview -->';
             const url = '${{ steps.deploy.outputs.url }}';
-            const body = `${marker}\n📖 Docs preview: ${url}`;
+
+            // Wait for deployment to be live (poll every 10s, up to 5 min)
+            let live = false;
+            for (let i = 0; i < 30; i++) {
+              try {
+                const res = await fetch(url);
+                if (res.ok) { live = true; break; }
+              } catch (e) {}
+              await new Promise(r => setTimeout(r, 10000));
+            }
+
+            const marker = '<!-- docs-preview -->';
+            const status = live ? '' : '\n\n> **Note:** The preview may not be ready yet.';
+            const body = `${marker}\n📖 Docs preview: ${url}${status}`;
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
