@@ -46,7 +46,7 @@ Shared logic is extracted into two composite actions:
 - **`.github/actions/build-docs`** -- Overrides `site_url` for the target subdirectory, builds the site, and stages the output
 - **`.github/actions/deploy-to-gh-pages`** -- Checks out (or creates) the `gh-pages` branch and pushes the built site to a target subdirectory
 
-A Python script (`.github/scripts/override_site_url.py`) uses [tomlkit](https://github.com/sdispater/tomlkit) to modify `site_url` in `zensical.toml` so that navigation and search work correctly in each subdirectory.
+A Python script (`.github/actions/build-docs/override_site_url.py`) uses [tomlkit](https://github.com/sdispater/tomlkit) to modify `site_url` in `zensical.toml` so that navigation and search work correctly in each subdirectory.
 
 ## Setup
 
