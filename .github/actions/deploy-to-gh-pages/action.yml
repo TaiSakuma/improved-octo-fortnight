@@ -9,10 +9,16 @@ inputs:
     description: Commit message
     required: true
 
+outputs:
+  url:
+    description: Default GitHub Pages URL for the deployed subdirectory
+    value: ${{ steps.deploy.outputs.url }}
+
 runs:
   using: composite
   steps:
-    - shell: bash
+    - id: deploy
+      shell: bash
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -32,3 +38,4 @@ runs:
         git add .nojekyll "$TARGET"
         git diff --cached --quiet || git commit -m "${{ inputs.commit-message }}"
         git push origin gh-pages
+        echo "url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${TARGET}/" >> "$GITHUB_OUTPUT"
