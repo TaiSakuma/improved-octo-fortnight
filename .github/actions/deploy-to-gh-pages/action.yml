@@ -1,0 +1,34 @@
+name: Deploy to gh-pages
+description: Deploy built docs to a subdirectory on gh-pages
+
+inputs:
+  target:
+    description: Subdirectory to deploy to
+    required: true
+  commit-message:
+    description: Commit message
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        TARGET="${{ inputs.target }}"
+        git fetch origin gh-pages 2>/dev/null || true
+        if git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
+          git checkout -B gh-pages origin/gh-pages
+        else
+          git checkout --orphan gh-pages
+          git rm -rf .
+          git clean -fd
+        fi
+        touch .nojekyll
+        rm -rf "$TARGET"
+        mkdir -p "$(dirname "$TARGET")"
+        cp -r /tmp/built-site "$TARGET"
+        git add .nojekyll "$TARGET"
+        git diff --cached --quiet || git commit -m "${{ inputs.commit-message }}"
+        git push origin gh-pages
