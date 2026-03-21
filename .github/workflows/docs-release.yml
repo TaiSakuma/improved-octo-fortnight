@@ -33,7 +33,7 @@ jobs:
 
       - name: Build docs
         run: |
-          uv run --group docs python scripts/override_site_url.py "${{ steps.version.outputs.version }}"
+          uv run --group docs python .github/scripts/override_site_url.py "${{ steps.version.outputs.version }}"
           uv run --group docs zensical build --clean --config-file zensical.local.toml
           cp -r site /tmp/built-site
 
