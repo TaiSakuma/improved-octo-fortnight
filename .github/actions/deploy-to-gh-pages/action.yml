@@ -2,6 +2,9 @@ name: Deploy to gh-pages
 description: Deploy built docs to a subdirectory on gh-pages
 
 inputs:
+  site-dir:
+    description: Path to the built site
+    required: true
   target:
     description: Subdirectory to deploy to
     required: true
@@ -31,10 +34,10 @@ runs:
           git rm -rf .
           git clean -fd
         fi
-        touch .nojekyll
         rm -rf "$TARGET"
         mkdir -p "$(dirname "$TARGET")"
-        cp -r /tmp/built-site "$TARGET"
+        cp -r "${{ inputs.site-dir }}" "$TARGET"
+        touch .nojekyll
         git add .nojekyll "$TARGET"
         git diff --cached --quiet || git commit -m "${{ inputs.commit-message }}"
         git push origin gh-pages
