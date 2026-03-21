@@ -1,0 +1,16 @@
+name: Build docs
+description: Build docs with site_url overridden for subdirectory deployment
+
+inputs:
+  subdir:
+    description: Subdirectory to deploy to (e.g., dev, 1.0.0, pr/3)
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        uv run --group docs python .github/scripts/override_site_url.py "${{ inputs.subdir }}"
+        uv run --group docs zensical build --clean --config-file zensical.local.toml
+        cp -r site /tmp/built-site

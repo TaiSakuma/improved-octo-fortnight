@@ -31,11 +31,9 @@ jobs:
 
       - uses: astral-sh/setup-uv@v7
 
-      - name: Build docs
-        run: |
-          uv run --group docs python .github/scripts/override_site_url.py "${{ steps.version.outputs.version }}"
-          uv run --group docs zensical build --clean --config-file zensical.local.toml
-          cp -r site /tmp/built-site
+      - uses: ./.github/actions/build-docs
+        with:
+          subdir: ${{ steps.version.outputs.version }}
 
       - uses: ./.github/actions/deploy-to-gh-pages
         with:
