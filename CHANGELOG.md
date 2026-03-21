@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 
+## [0.2.1] - 2026-03-21
+
+### Bug Fixes
+
+- Trigger docs release from changelog workflow ([#11](https://github.com/TaiSakuma/improved-octo-fortnight/pull/11))
+
+
 ## [0.2.0] - 2026-03-21
 
 ### Bug Fixes
