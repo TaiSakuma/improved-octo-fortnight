@@ -35,7 +35,7 @@ jobs:
       - uses: ./.github/actions/deploy-to-gh-pages
         with:
           target: pr/${{ github.event.number }}
-          commit-message: Deploy PR #${{ github.event.number }} preview
+          commit-message: "Deploy PR #${{ github.event.number }} preview"
 
       - name: Post or update PR comment
         if: steps.preview.outputs.url != ''
