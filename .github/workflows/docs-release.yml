@@ -32,11 +32,13 @@ jobs:
       - uses: astral-sh/setup-uv@v7
 
       - uses: ./.github/actions/build-docs
+        id: build
         with:
           subdir: ${{ steps.version.outputs.version }}
 
       - uses: ./.github/actions/deploy-to-gh-pages
         with:
+          site-dir: ${{ steps.build.outputs.site-dir }}
           target: ${{ steps.version.outputs.version }}
           commit-message: Deploy docs for v${{ steps.version.outputs.version }}
 
@@ -44,7 +46,7 @@ jobs:
         run: |
           TARGET="${{ steps.version.outputs.version }}"
           rm -rf latest
-          cp -r /tmp/built-site latest
+          cp -r "${{ steps.build.outputs.site-dir }}" latest
           # Generate root index.html
           REPO_NAME="${{ github.event.repository.name }}"
           {

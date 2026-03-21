@@ -21,10 +21,12 @@ jobs:
       - uses: astral-sh/setup-uv@v7
 
       - uses: ./.github/actions/build-docs
+        id: build
         with:
           subdir: dev
 
       - uses: ./.github/actions/deploy-to-gh-pages
         with:
+          site-dir: ${{ steps.build.outputs.site-dir }}
           target: dev
           commit-message: Deploy dev docs

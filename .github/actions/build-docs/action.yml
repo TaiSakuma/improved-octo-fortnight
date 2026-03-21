@@ -6,6 +6,11 @@ inputs:
     description: Subdirectory to deploy to (e.g., dev, 1.0.0, pr/3)
     required: true
 
+outputs:
+  site-dir:
+    description: Path to the built site
+    value: /tmp/built-site
+
 runs:
   using: composite
   steps:
@@ -13,5 +18,5 @@ runs:
       run: |
         uv run --group docs python .github/scripts/override_site_url.py "${{ inputs.subdir }}"
         uv run --group docs zensical build --clean
-        cp -r site /tmp/built-site
+        mv site /tmp/built-site
         git checkout -- zensical.toml
