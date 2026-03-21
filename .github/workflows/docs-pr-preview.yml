@@ -20,30 +20,22 @@ jobs:
 
       - uses: astral-sh/setup-uv@v7
 
-      - name: Build docs
-        run: |
-          uv run --group docs python scripts/override_site_url.py "pr/${{ github.event.number }}"
-          uv run --group docs zensical build --clean --config-file zensical.local.toml
-          cp -r site /tmp/built-site
-
-      - name: Get preview URL
-        id: preview
-        run: |
-          url=$(uv run --group docs python -c "import tomlkit; print(tomlkit.loads(open('zensical.local.toml').read()).get('project', {}).get('site_url', ''))")
-          echo "url=${url}" >> "$GITHUB_OUTPUT"
+      - uses: ./.github/actions/build-docs
+        with:
+          subdir: pr/${{ github.event.number }}
 
       - uses: ./.github/actions/deploy-to-gh-pages
+        id: deploy
         with:
           target: pr/${{ github.event.number }}
           commit-message: "Deploy PR #${{ github.event.number }} preview"
 
       - name: Post or update PR comment
-        if: steps.preview.outputs.url != ''
         uses: actions/github-script@v7
         with:
           script: |
             const marker = '<!-- docs-preview -->';
-            const url = '${{ steps.preview.outputs.url }}';
+            const url = '${{ steps.deploy.outputs.url }}';
             const body = `${marker}\n📖 Docs preview: ${url}`;
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
