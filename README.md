@@ -23,7 +23,7 @@ Documentation is built with [zensical](https://zensical.org/) and deployed by pu
 | --------------------- | -------------------------------- | ----------------------------------------- |
 | `docs.yml`            | Push to `main`                   | `/dev/`                                   |
 | `docs-release.yml`    | Release (via changelog workflow) | `/<version>/` + `/latest/` + `index.html` |
-| `docs-pr-preview.yml` | PR opened/updated                | `/pr/<number>/`                           |
+| `docs-pr-preview.yml` | PR opened/updated (incl. forks)  | `/pr/<number>/`                           |
 | `docs-pr-cleanup.yml` | PR closed                        | removes `/pr/<number>/`                   |
 
 The `gh-pages` branch has the following structure:
