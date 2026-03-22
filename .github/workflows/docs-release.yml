@@ -49,10 +49,15 @@ jobs:
 
       - name: Update latest
         run: |
+          git worktree add /tmp/gh-pages gh-pages
+          cd /tmp/gh-pages
           rm -rf latest
           cp -r "${{ steps.build.outputs.site-dir }}" latest
           git add latest
           git commit -m "Update latest"
+          git push origin gh-pages
+
+      - run: git worktree remove /tmp/gh-pages
 
       - uses: ./.github/actions/update-index
         with:

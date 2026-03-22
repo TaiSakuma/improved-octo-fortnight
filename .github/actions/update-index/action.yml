@@ -12,11 +12,21 @@ inputs:
 runs:
   using: composite
   steps:
+    # Create a worktree for gh-pages.
+    - shell: bash
+      run: git worktree add /tmp/gh-pages gh-pages
+
+    # Generate index.html, commit, and push.
     - shell: bash
       run: |
+        cd /tmp/gh-pages
         python "${{ github.action_path }}/generate_index.py" \
           "${{ inputs.repo-name }}" \
           "${{ inputs.repo-url }}"
         git add index.html
         git diff --cached --quiet || git commit -m "Update index.html"
         git push origin gh-pages
+
+    # Clean up the worktree.
+    - shell: bash
+      run: git worktree remove /tmp/gh-pages
