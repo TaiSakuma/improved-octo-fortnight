@@ -18,59 +18,59 @@
 [preview-badge]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-pr-preview.yml/badge.svg
 [preview-url]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-pr-preview.yml
 
-A reference implementation of a documentation workflow using [zensical](https://zensical.org/) and GitHub Pages.
+A reference implementation of documentation workflows.
 
-- [latest](https://taisakuma.github.io/improved-octo-fortnight/latest/)
-- [dev](https://taisakuma.github.io/improved-octo-fortnight/dev/)
+📚 [Demo site](https://taisakuma.github.io/improved-octo-fortnight/)
 
 ## Features
 
-- **Versioned docs** -- Release docs at `/<version>/`, dev docs at `/dev/`, and a `/latest/` alias
-- **PR previews** -- Every PR gets a preview deployment at `/pr/<number>/` with an automatic comment linking to it
-- **PR cleanup** -- Preview deployments are removed when PRs are closed
-- **Version index** -- An auto-generated root `index.html` lists all available versions
-- **Deploy verification** -- The preview URL is polled before posting the PR comment; a note is added if the site isn't ready yet
-- **Custom domain support** -- Works with both default GitHub Pages URLs and custom domains
-- **API reference** -- Auto-generated from Python docstrings using [mkdocstrings](https://mkdocstrings.github.io/). Add `:::` directives in Markdown to render any module (see `docs/api.md` for an example)
+### Content
 
-## How it works
+- Built with [zensical](https://zensical.org/)
+- API reference auto-generated using [mkdocstrings](https://mkdocstrings.github.io/)
 
-Documentation is built with [zensical](https://zensical.org/) and deployed by pushing subdirectories to a `gh-pages` branch. Four workflows handle the different deployment scenarios:
+This repo documents a Python package. The setup should work for other languages with minor modifications.
 
-| Workflow              | Trigger                          | Deploys to                                |
-| --------------------- | -------------------------------- | ----------------------------------------- |
-| `docs-dev.yml`        | Push to `main`                   | `/dev/`                                   |
-| `docs-release.yml`    | Release (via changelog workflow) | `/<version>/` + `/latest/` + `index.html` |
-| `docs-pr-preview.yml` | PR opened/updated (incl. forks)  | `/pr/<number>/`                           |
-| `docs-pr-cleanup.yml` | PR closed                        | removes `/pr/<number>/`                   |
+### Deployment
 
-The `gh-pages` branch has the following structure:
+- Deployed to [GitHub Pages](https://pages.github.com/) via [GitHub
+  Actions](https://github.com/features/actions)
+- Separate docs for each release and development branch
+- Docs preview for each PR
 
-```
-gh-pages
-├── .nojekyll
+## GitHub Pages structure
+
+The deployed site is structured as follows:
+
+```text
+/
 ├── index.html          # auto-generated version index
 ├── latest/             # copy of the latest release
 ├── dev/                # built from main
-├── 0.2.1/              # release versions
-├── 0.2.0/
+├── 2.0.0/              # release versions
+├── 1.1.0/
+├── 1.0.0/
 └── pr/
     ├── 14/             # PR preview
     └── 13/
 ```
 
-Shared logic is extracted into two composite actions:
+## GitHub Actions workflows
 
-- **`.github/actions/build-docs`** -- Overrides `site_url` for the target subdirectory, builds the site, and stages the output
-- **`.github/actions/deploy-to-gh-pages`** -- Checks out (or creates) the `gh-pages` branch and pushes the built site to a target subdirectory
+These workflows build, deploy, and clean up the documentation:
 
-A Python script (`.github/actions/build-docs/override_site_url.py`) uses [tomlkit](https://github.com/sdispater/tomlkit) to modify `site_url` in `zensical.toml` so that navigation and search work correctly in each subdirectory.
+| Workflow                | Trigger           | Deploys to                              |
+| ----------------------- | ----------------- | --------------------------------------- |
+| [`docs-dev.yml`]        | Push to `main`    | `/dev/`, `index.html`                   |
+| [`docs-release.yml`]    | Release           | `/<version>/`, `/latest/`, `index.html` |
+| [`docs-pr-preview.yml`] | PR opened/updated | `/pr/<number>/`                         |
+| [`docs-pr-cleanup.yml`] | PR closed         | removes `/pr/<number>/`                 |
 
-## Setup
+[`docs-dev.yml`]: .github/workflows/docs-dev.yml
+[`docs-release.yml`]: .github/workflows/docs-release.yml
+[`docs-pr-preview.yml`]: .github/workflows/docs-pr-preview.yml
+[`docs-pr-cleanup.yml`]: .github/workflows/docs-pr-cleanup.yml
 
-1. Install [uv](https://docs.astral.sh/uv/)
-2. Build docs locally:
-   ```
-   uv run --group docs zensical serve
-   ```
-3. Set GitHub Pages source to **Deploy from a branch** > `gh-pages` (root `/`)
+The workflows require the GitHub settings
+
+- `Settings` > `Pages` > `Source` > `Deploy from a branch` > `gh-pages` (root `/`)
