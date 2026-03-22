@@ -1,4 +1,4 @@
-name: Documentation (PR Cleanup)
+name: Remove docs preview
 
 on:
   pull_request:
