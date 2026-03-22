@@ -16,10 +16,14 @@ runs:
   steps:
     - shell: bash
       run: |
-        # Use github.action_path so the script always comes from the action's
-        # source (trusted main branch), not the checked-out working directory
-        # (which may contain untrusted PR code).
+        # Update the site url.
         uv run --group docs python "${{ github.action_path }}/override_site_url.py" "${{ inputs.subdir }}"
+
+        # Build the docs.
         uv run --group docs zensical build --clean
+
+        # Move the docs to the output directory.
         mv site /tmp/built-site
-        git checkout -- zensical.toml
+
+        # Leave the working directory clean for the next action.
+        git checkout -- .
