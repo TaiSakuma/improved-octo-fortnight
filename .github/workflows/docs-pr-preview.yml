@@ -61,6 +61,11 @@ jobs:
           name: docs-preview
           path: ${{ env.SITE_DIR }}
 
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
       # Reference the action from @main so deploy logic always comes from the
       # trusted main branch.
       - uses: TaiSakuma/improved-octo-fortnight/.github/actions/deploy-to-gh-pages@main

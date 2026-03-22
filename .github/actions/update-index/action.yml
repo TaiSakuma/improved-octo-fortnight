@@ -1,0 +1,22 @@
+name: Update index.html
+description: Regenerate index.html, commit and push
+
+inputs:
+  repo-name:
+    description: Repository name for the index page title
+    required: true
+  repo-url:
+    description: Repository URL for the GitHub link
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        python "${{ github.action_path }}/generate_index.py" \
+          "${{ inputs.repo-name }}" \
+          "${{ inputs.repo-url }}"
+        git add index.html
+        git diff --cached --quiet || git commit -m "Update index.html"
+        git push origin gh-pages
