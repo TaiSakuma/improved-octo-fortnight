@@ -17,10 +17,13 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Remove PR preview
+      - name: Configure git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Remove PR preview
+        run: |
           git fetch origin gh-pages 2>/dev/null || true
           if ! git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
             echo "gh-pages branch does not exist, nothing to clean up"

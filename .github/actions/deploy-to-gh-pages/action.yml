@@ -23,8 +23,6 @@ runs:
     - id: deploy
       shell: bash
       run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
         TARGET="${{ inputs.target }}"
         git fetch origin gh-pages 2>/dev/null || true
         if git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then

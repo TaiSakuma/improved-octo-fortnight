@@ -36,32 +36,25 @@ jobs:
         with:
           subdir: ${{ steps.version.outputs.version }}
 
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
       - uses: ./.github/actions/deploy-to-gh-pages
         with:
           site-dir: ${{ steps.build.outputs.site-dir }}
           target: ${{ steps.version.outputs.version }}
           commit-message: Deploy docs for v${{ steps.version.outputs.version }}
 
-      - name: Update latest and index.html
+      - name: Update latest
         run: |
-          TARGET="${{ steps.version.outputs.version }}"
           rm -rf latest
           cp -r "${{ steps.build.outputs.site-dir }}" latest
-          # Generate root index.html
-          REPO_NAME="${{ github.event.repository.name }}"
-          {
-            echo '<!DOCTYPE html>'
-            echo "<html><head><meta charset=\"utf-8\"><title>${REPO_NAME}</title></head>"
-            echo "<body><h1>${REPO_NAME} documentation</h1><ul>"
-            echo '<li><a href="latest/">latest</a></li>'
-            if [ -d dev ]; then
-              echo '<li><a href="dev/">dev</a></li>'
-            fi
-            for d in $(find . -maxdepth 1 -type d -name '[0-9]*' | sed 's|^\./||' | sort -rV); do
-              echo "<li><a href=\"$d/\">$d</a></li>"
-            done
-            echo '</ul></body></html>'
-          } > index.html
-          git add latest index.html
-          git diff --cached --quiet || git commit -m "Update latest and index.html for v${TARGET}"
-          git push origin gh-pages
+          git add latest
+          git commit -m "Update latest"
+
+      - uses: ./.github/actions/update-index
+        with:
+          repo-name: ${{ github.event.repository.name }}
+          repo-url: ${{ github.event.repository.html_url }}
