@@ -1,5 +1,23 @@
 # improved-octo-fortnight
 
+[![GitHub Release][release-badge]][release-url]
+[![GitHub Pages][pages-badge]][pages-url]
+
+[![Deploy dev docs][dev-badge]][dev-url]
+[![Deploy release docs][release-docs-badge]][release-docs-url]
+[![Deploy docs preview][preview-badge]][preview-url]
+
+[release-badge]: https://img.shields.io/github/v/release/TaiSakuma/improved-octo-fortnight
+[release-url]: https://github.com/TaiSakuma/improved-octo-fortnight/releases/latest
+[pages-badge]: https://img.shields.io/website?url=https://taisakuma.github.io/improved-octo-fortnight/
+[pages-url]: https://taisakuma.github.io/improved-octo-fortnight/
+[dev-badge]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-dev.yml/badge.svg
+[dev-url]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-dev.yml
+[release-docs-badge]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-release.yml/badge.svg
+[release-docs-url]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-release.yml
+[preview-badge]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-pr-preview.yml/badge.svg
+[preview-url]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-pr-preview.yml
+
 A reference implementation of a documentation workflow using [zensical](https://zensical.org/) and GitHub Pages.
 
 - [latest](https://taisakuma.github.io/improved-octo-fortnight/latest/)
