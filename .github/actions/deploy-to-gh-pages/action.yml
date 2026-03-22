@@ -20,26 +20,20 @@ outputs:
 runs:
   using: composite
   steps:
-    # Save the current ref so we can restore it after deploying.
-    - id: save-ref
-      shell: bash
-      run: echo "ref=$(git symbolic-ref HEAD 2>/dev/null || git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-
-    # Switch to gh-pages, creating it as an orphan branch if needed.
+    # Create a worktree for gh-pages.
     - shell: bash
       run: |
         git fetch origin gh-pages 2>/dev/null || true
         if git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
-          git checkout -B gh-pages origin/gh-pages
+          git worktree add /tmp/gh-pages gh-pages
         else
-          git checkout --orphan gh-pages
-          git rm -rf .
-          git clean -fd
+          git worktree add --orphan -b gh-pages /tmp/gh-pages
         fi
 
     # Copy the built site into the target subdirectory, commit, and push.
     - shell: bash
       run: |
+        cd /tmp/gh-pages
         TARGET="${{ inputs.target }}"
         rm -rf "$TARGET"
         mkdir -p "$(dirname "$TARGET")"
@@ -49,9 +43,9 @@ runs:
         git diff --cached --quiet || git commit -m "${{ inputs.commit-message }}"
         git push origin gh-pages
 
-    # Restore the original branch so subsequent steps can find local actions.
+    # Clean up the worktree.
     - shell: bash
-      run: git checkout "${{ steps.save-ref.outputs.ref }}"
+      run: git worktree remove /tmp/gh-pages
 
     # Output the default GitHub Pages URL for the deployed subdirectory.
     - id: url
