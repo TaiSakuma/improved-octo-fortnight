@@ -21,7 +21,7 @@ Documentation is built with [zensical](https://zensical.org/) and deployed by pu
 
 | Workflow              | Trigger                          | Deploys to                                |
 | --------------------- | -------------------------------- | ----------------------------------------- |
-| `docs.yml`            | Push to `main`                   | `/dev/`                                   |
+| `docs-dev.yml`        | Push to `main`                   | `/dev/`                                   |
 | `docs-release.yml`    | Release (via changelog workflow) | `/<version>/` + `/latest/` + `index.html` |
 | `docs-pr-preview.yml` | PR opened/updated (incl. forks)  | `/pr/<number>/`                           |
 | `docs-pr-cleanup.yml` | PR closed                        | removes `/pr/<number>/`                   |

@@ -1,4 +1,4 @@
-name: Documentation (PR Preview)
+name: Deploy docs preview
 
 # Use pull_request_target so the workflow has write permissions even for fork
 # PRs. The pull_request trigger restricts fork PRs to a read-only GITHUB_TOKEN,

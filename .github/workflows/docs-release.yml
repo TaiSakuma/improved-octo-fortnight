@@ -1,4 +1,4 @@
-name: Documentation (Release)
+name: Deploy release docs
 
 on:
   workflow_run:
