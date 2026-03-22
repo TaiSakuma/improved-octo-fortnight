@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 
 
+## [0.3.0] - 2026-03-22
+
+### Features
+
+- Styled index.html from template with update-index action ([#22](https://github.com/TaiSakuma/improved-octo-fortnight/pull/22))
+
+### Bug Fixes
+
+- Use git worktree for gh-pages operations ([#23](https://github.com/TaiSakuma/improved-octo-fortnight/pull/23))
+
+### Documentation
+
+- Note fork PR support in workflow table ([#18](https://github.com/TaiSakuma/improved-octo-fortnight/pull/18))
+
+### Refactoring
+
+- Define SITE_DIR once in PR preview workflow ([#19](https://github.com/TaiSakuma/improved-octo-fortnight/pull/19))
+- Rename docs workflows to start with a verb ([#20](https://github.com/TaiSakuma/improved-octo-fortnight/pull/20))
+- Separate wait step from PR comment step ([#21](https://github.com/TaiSakuma/improved-octo-fortnight/pull/21))
+
+### Build & CI
+
+- Secure PR preview workflow for fork PRs ([#16](https://github.com/TaiSakuma/improved-octo-fortnight/pull/16))
+
+
 ## [0.2.2] - 2026-03-21
 
 ### Features
