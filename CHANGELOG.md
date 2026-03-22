@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 
+## [0.3.1] - 2026-03-22
+
+### Documentation
+
+- Rewrite README and add MIT license ([#24](https://github.com/TaiSakuma/improved-octo-fortnight/pull/24))
+
+
 ## [0.3.0] - 2026-03-22
 
 ### Features
