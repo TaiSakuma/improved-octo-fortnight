@@ -38,7 +38,7 @@ def main() -> None:
     repo_name = sys.argv[1]
     repo_url = sys.argv[2]
 
-    template_path = Path(__file__).parent / '../templates/index.html'
+    template_path = Path(__file__).parent / 'index.html'
     template = Template(template_path.read_text())
 
     versions = find_versions()

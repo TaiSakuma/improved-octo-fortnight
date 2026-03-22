@@ -42,13 +42,9 @@ jobs:
           target: ${{ steps.version.outputs.version }}
           commit-message: Deploy docs for v${{ steps.version.outputs.version }}
 
-      - name: Update latest and index.html
-        run: |
-          rm -rf latest
-          cp -r "${{ steps.build.outputs.site-dir }}" latest
-          python .github/scripts/generate_index.py \
-            "${{ github.event.repository.name }}" \
-            "${{ github.event.repository.html_url }}"
-          git add latest index.html
-          git diff --cached --quiet || git commit -m "Update latest and index.html for v${{ steps.version.outputs.version }}"
-          git push origin gh-pages
+      - uses: ./.github/actions/update-latest
+        with:
+          site-dir: ${{ steps.build.outputs.site-dir }}
+          repo-name: ${{ github.event.repository.name }}
+          repo-url: ${{ github.event.repository.html_url }}
+          version: ${{ steps.version.outputs.version }}
