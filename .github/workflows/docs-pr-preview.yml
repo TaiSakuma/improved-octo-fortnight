@@ -7,6 +7,9 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened]
 
+env:
+  SITE_DIR: /tmp/built-site
+
 concurrency:
   group: docs-deploy
   cancel-in-progress: false
@@ -34,11 +37,12 @@ jobs:
         id: build
         with:
           subdir: pr/${{ github.event.number }}
+          site-dir: ${{ env.SITE_DIR }}
 
       - uses: actions/upload-artifact@v4
         with:
           name: docs-preview
-          path: /tmp/built-site
+          path: ${{ env.SITE_DIR }}
           retention-days: 1
 
   deploy:
@@ -55,14 +59,14 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: docs-preview
-          path: /tmp/built-site
+          path: ${{ env.SITE_DIR }}
 
       # Reference the action from @main so deploy logic always comes from the
       # trusted main branch.
       - uses: TaiSakuma/improved-octo-fortnight/.github/actions/deploy-to-gh-pages@main
         id: deploy
         with:
-          site-dir: /tmp/built-site
+          site-dir: ${{ env.SITE_DIR }}
           target: pr/${{ github.event.number }}
           commit-message: "Deploy PR #${{ github.event.number }} preview"
 
