@@ -125,6 +125,10 @@ $$
 \cos x=\sum_{k=0}^{\infty}\frac{(-1)^k}{(2k)!}x^{2k}
 $$
 
+$$
+\sin x=\sum_{k=0}^{\infty}\frac{(-1)^k}{(2k+1)!}x^{2k+1}
+$$
+
 !!! warning "Needs configuration"
     Note that MathJax is included via a `script` tag on this page and is not
     configured in the generated default configuration to avoid including it
