@@ -20,7 +20,7 @@ runs:
     - shell: bash
       run: |
         cd /tmp/gh-pages
-        python "${{ github.action_path }}/generate_index.py" \
+        uv run --group docs python "${{ github.action_path }}/generate_index.py" \
           "${{ inputs.repo-name }}" \
           "${{ inputs.repo-url }}"
         git add index.html

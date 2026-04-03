@@ -63,6 +63,8 @@ jobs:
           git diff --cached --quiet || git commit -m "Update latest"
           git push origin gh-pages
 
+      - run: git worktree remove /tmp/gh-pages
+
       - uses: ./.github/actions/update-index
         with:
           repo-name: ${{ github.event.repository.name }}
