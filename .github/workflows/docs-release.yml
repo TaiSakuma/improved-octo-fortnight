@@ -36,6 +36,12 @@ jobs:
         with:
           subdir: ${{ steps.version.outputs.version }}
 
+      - uses: ./.github/actions/build-docs
+        id: build-latest
+        with:
+          subdir: latest
+          site-dir: /tmp/built-site-latest
+
       - name: Configure git
         run: |
           git config user.name "github-actions[bot]"
@@ -52,12 +58,10 @@ jobs:
           git worktree add /tmp/gh-pages gh-pages
           cd /tmp/gh-pages
           rm -rf latest
-          cp -r "${{ steps.build.outputs.site-dir }}" latest
+          cp -r "${{ steps.build-latest.outputs.site-dir }}" latest
           git add latest
-          git commit -m "Update latest"
+          git diff --cached --quiet || git commit -m "Update latest"
           git push origin gh-pages
-
-      - run: git worktree remove /tmp/gh-pages
 
       - uses: ./.github/actions/update-index
         with:
