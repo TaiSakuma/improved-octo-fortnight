@@ -5,7 +5,7 @@
 
 [![Deploy dev docs][dev-badge]][dev-url]
 [![Deploy release docs][release-docs-badge]][release-docs-url]
-[![Deploy docs preview][preview-badge]][preview-url]
+[![Build docs preview][preview-badge]][preview-url]
 
 [release-badge]: https://img.shields.io/github/v/release/TaiSakuma/improved-octo-fortnight
 [release-url]: https://github.com/TaiSakuma/improved-octo-fortnight/releases/latest
@@ -15,8 +15,8 @@
 [dev-url]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-dev.yml
 [release-docs-badge]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-release.yml/badge.svg
 [release-docs-url]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-release.yml
-[preview-badge]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-pr-preview.yml/badge.svg
-[preview-url]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-pr-preview.yml
+[preview-badge]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-pr-build.yml/badge.svg
+[preview-url]: https://github.com/TaiSakuma/improved-octo-fortnight/actions/workflows/docs-pr-build.yml
 
 A reference implementation of documentation workflows.
 
@@ -63,12 +63,14 @@ These workflows build, deploy, and clean up the documentation:
 | ----------------------- | ----------------- | --------------------------------------- |
 | [`docs-dev.yml`]        | Push to `main`    | `/dev/`, `index.html`                   |
 | [`docs-release.yml`]    | Release           | `/<version>/`, `/latest/`, `index.html` |
-| [`docs-pr-preview.yml`] | PR opened/updated | `/pr/<number>/`                         |
+| [`docs-pr-build.yml`]   | PR opened/updated | builds docs, uploads artifact           |
+| [`docs-pr-deploy.yml`]  | Build completed   | `/pr/<number>/`                         |
 | [`docs-pr-cleanup.yml`] | PR closed         | removes `/pr/<number>/`                 |
 
 [`docs-dev.yml`]: .github/workflows/docs-dev.yml
 [`docs-release.yml`]: .github/workflows/docs-release.yml
-[`docs-pr-preview.yml`]: .github/workflows/docs-pr-preview.yml
+[`docs-pr-build.yml`]: .github/workflows/docs-pr-build.yml
+[`docs-pr-deploy.yml`]: .github/workflows/docs-pr-deploy.yml
 [`docs-pr-cleanup.yml`]: .github/workflows/docs-pr-cleanup.yml
 
 The workflows require the GitHub settings
