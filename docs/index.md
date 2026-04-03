@@ -6,6 +6,8 @@ icon: lucide/rocket
 
 For full documentation visit [zensical.org](https://zensical.org/docs/).
 
+<!-- Test fork PR preview workflow -->
+
 ## Commands
 
 * [`zensical new`][new] - Create a new project
