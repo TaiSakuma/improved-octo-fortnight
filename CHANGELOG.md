@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 
 
+## [0.3.2] - 2026-04-03
+
+### Bug Fixes
+
+- Use ls-remote and -B for robust gh-pages worktree creation ([#34](https://github.com/TaiSakuma/improved-octo-fortnight/pull/34))
+- Address release workflow and version index issues ([#35](https://github.com/TaiSakuma/improved-octo-fortnight/pull/35))
+
+### Documentation
+
+- Update README for PR preview workflow split ([#31](https://github.com/TaiSakuma/improved-octo-fortnight/pull/31))
+
+### Build & CI
+
+- Fix fork PR preview workflows ([#29](https://github.com/TaiSakuma/improved-octo-fortnight/pull/29))
+- Bump actions/upload-artifact from 4 to 7 ([#25](https://github.com/TaiSakuma/improved-octo-fortnight/pull/25))
+- Bump actions/download-artifact from 4 to 8 ([#26](https://github.com/TaiSakuma/improved-octo-fortnight/pull/26))
+- Bump actions/github-script from 7 to 8 ([#27](https://github.com/TaiSakuma/improved-octo-fortnight/pull/27))
+
+
 ## [0.3.1] - 2026-03-22
 
 ### Documentation
