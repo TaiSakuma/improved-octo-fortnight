@@ -6,7 +6,8 @@ icon: lucide/rocket
 
 For full documentation visit [zensical.org](https://zensical.org/docs/).
 
-<!-- Test fork PR preview workflow -->
+!!! note "Fork PR Preview Test"
+    This sentence was added from a fork to test the PR preview workflow.
 
 ## Commands
 
