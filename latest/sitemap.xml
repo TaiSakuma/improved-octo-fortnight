@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <url>
-        <loc>https://taisakuma.github.io/improved-octo-fortnight/0.3.1/</loc>
+        <loc>https://taisakuma.github.io/improved-octo-fortnight/latest/</loc>
       </url>
       <url>
-        <loc>https://taisakuma.github.io/improved-octo-fortnight/0.3.1/markdown/</loc>
+        <loc>https://taisakuma.github.io/improved-octo-fortnight/latest/markdown/</loc>
       </url>
       <url>
-        <loc>https://taisakuma.github.io/improved-octo-fortnight/0.3.1/api/</loc>
+        <loc>https://taisakuma.github.io/improved-octo-fortnight/latest/api/</loc>
       </url>
 </urlset>
