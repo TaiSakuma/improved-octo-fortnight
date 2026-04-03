@@ -19,4 +19,4 @@ tag_sign = false
 check_dirty = false
 
 [dependency-groups]
-docs = ["mkdocstrings-python", "zensical", "tomlkit"]
+docs = ["mkdocstrings-python", "zensical", "tomlkit", "packaging"]
