@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 
 
+## [0.4.0] - 2026-07-21
+
+### Features
+
+- Release from an old commit ([#39](https://github.com/TaiSakuma/improved-octo-fortnight/pull/39))
+
+### Build & CI
+
+- Recognize the ! breaking-change marker ([#38](https://github.com/TaiSakuma/improved-octo-fortnight/pull/38))
+- Bump actions/checkout from 6 to 7 ([#37](https://github.com/TaiSakuma/improved-octo-fortnight/pull/37))
+- Bump actions/github-script from 8 to 9 ([#36](https://github.com/TaiSakuma/improved-octo-fortnight/pull/36))
+- Pin GitHub Actions to commit SHAs ([#40](https://github.com/TaiSakuma/improved-octo-fortnight/pull/40))
+
+
 ## [0.3.2] - 2026-04-03
 
 ### Bug Fixes
