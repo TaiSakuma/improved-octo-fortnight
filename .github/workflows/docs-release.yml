@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Checkout release tag
         id: checkout
-        uses: TaiSakuma/checkout-version-tag@v1
+        uses: TaiSakuma/checkout-version-tag@920911b2aaaea227efc3a0e50c201aa03ccafa0c # v1.2.0
         with:
           trigger-tag: ${{ github.event.workflow_run.head_branch }}
 
@@ -28,6 +28,23 @@ jobs:
         run: echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
         env:
           TAG: ${{ steps.checkout.outputs.release-tag }}
+
+      # Decide "is this the newest release?" over every v* tag by version
+      # order, so a backport never overwrites the /latest/ docs.
+      # checkout-version-tag checks out a single tag, so fetch them all.
+      - name: Determine whether this is the newest release
+        id: latest
+        env:
+          RELEASE_TAG: ${{ steps.checkout.outputs.release-tag }}
+        run: |
+          set -euo pipefail
+          git fetch --force --tags origin
+          newest="$(git tag -l 'v*' | sort -V | tail -n1)"
+          if [ "${newest}" = "${RELEASE_TAG}" ]; then
+            echo "is-latest=true"  >> "$GITHUB_OUTPUT"
+          else
+            echo "is-latest=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - uses: astral-sh/setup-uv@v7
 
@@ -38,6 +55,7 @@ jobs:
 
       - uses: ./.github/actions/build-docs
         id: build-latest
+        if: steps.latest.outputs.is-latest == 'true'
         with:
           subdir: latest
           site-dir: /tmp/built-site-latest
@@ -54,6 +72,7 @@ jobs:
           commit-message: Deploy docs for v${{ steps.version.outputs.version }}
 
       - name: Update latest
+        if: steps.latest.outputs.is-latest == 'true'
         run: |
           git worktree add /tmp/gh-pages gh-pages
           cd /tmp/gh-pages
@@ -63,7 +82,8 @@ jobs:
           git diff --cached --quiet || git commit -m "Update latest"
           git push origin gh-pages
 
-      - run: git worktree remove /tmp/gh-pages
+      - if: steps.latest.outputs.is-latest == 'true'
+        run: git worktree remove /tmp/gh-pages
 
       - uses: ./.github/actions/update-index
         with:
