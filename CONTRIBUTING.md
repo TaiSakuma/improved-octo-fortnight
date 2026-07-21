@@ -36,11 +36,14 @@ type: description
 | `chore`    | Other changes that don't modify src or test files       |
 | `revert`   | Reverts a previous commit                               |
 
+Append `!` to indicate breaking changes (e.g., `feat!: description`).
+
 ### Examples
 
 - `feat: add user authentication`
 - `fix: handle empty input`
 - `docs: update installation instructions`
+- `feat!: remove get_user()`
 
 ### Individual Commits
 
